@@ -21,9 +21,21 @@
     <div class="black-bg">
       <div class="white-bg">
         <h4>로그인하세요</h4>
-        <button class="btn btn-danger" id="close">닫기</button>
+        <form action="success.html">
+          <div class="my-3">
+            <input type="text" class="form-control" id="inputId" />
+          </div>
+          <div class="my-3">
+            <input type="password" class="form-control" id="inputPw" />
+          </div>
+          <button type="submit" class="btn btn-primary" id="login">
+            로그인
+          </button>
+          <button type="button" class="btn btn-danger" id="close">닫기</button>
+        </form>
       </div>
     </div>
+
     <nav class="navbar navbar-light bg-light">
       <div class="container-fluid">
         <span class="navbar-brand">Navbar</span>
@@ -32,6 +44,7 @@
         </button>
       </div>
     </nav>
+
     <ul class="list-group">
       <li class="list-group-item">An item</li>
       <li class="list-group-item">A second item</li>
@@ -46,6 +59,16 @@
     <button id="test-btn">로그인</button>
 
     <script>
+      $("#login").on("click", function (e) {
+        if (!$("#inputId").val()) {
+          alert("아이디를 입력하세요.");
+          e.preventDefault();
+        } else if (!$("#inputPw").val()) {
+          alert("비밀번호를 입력하세요.");
+          e.preventDefault();
+        }
+      });
+
       $("#test-btn").on("click", function () {
         $(".black-bg").toggleClass("show");
       });
