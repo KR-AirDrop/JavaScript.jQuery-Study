@@ -39,11 +39,28 @@
     <nav class="navbar navbar-light bg-light">
       <div class="container-fluid">
         <span class="navbar-brand">Navbar</span>
+        <span class="badge bg-dark">Light 🔄</span>
+
         <button class="navbar-toggler" type="button">
           <span class="navbar-toggler-icon"></span>
         </button>
       </div>
     </nav>
+
+    <script>
+      var count = 0;
+
+      $(".badge").on("click", function () {
+        count++;
+        if (count % 2 == 1) {
+          $(".badge").html("Dark 🔄");
+          $("body").toggleClass("dark");
+        } else {
+          $(".badge").html("Light 🔄");
+          $("body").toggleClass("dark");
+        }
+      });
+    </script>
 
     <ul class="list-group">
       <li class="list-group-item">An item</li>
@@ -59,6 +76,17 @@
     <button id="test-btn">로그인</button>
 
     <script>
+      function 삼육구(num) {
+        if (num % 9 == 0) {
+          console.log("박수");
+          console.log("박수");
+        } else if (num % 3 == 0) {
+          console.log("박수");
+        } else {
+          console.log("통과");
+        }
+      }
+
       $("#login").on("click", function (e) {
         if (!$("#inputId").val()) {
           alert("아이디를 입력하세요.");

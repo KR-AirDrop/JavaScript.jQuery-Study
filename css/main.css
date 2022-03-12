@@ -47,4 +47,9 @@ div {
 .show {
   visibility: visible;
   opacity: 1;
+}
+
+.dark {
+  color: white;
+  background-color: #151515;
 }/*# sourceMappingURL=main.css.map */
