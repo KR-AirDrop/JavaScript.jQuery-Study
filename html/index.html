@@ -9,25 +9,38 @@
   </head>
   <body>
     <!-- 
-      
+
     UI 만드는 스텝
     1. HTML/CSS로 미리 디자인 (필요하면 숨겨놓음)
     2. 필요할 때 보여달라고 코드 짬
 
+    function, 파라미터, ClassName으로 찾을 때는 인덱싱까지,
+    이벤트리스너
+    - event : 클릭, 키입력, 스크롤, 드래그 등등
+    - 파라미터에 들어가는 함수 > 콜백함수
+
    -->
 
     <div class="alert-box" id="alert-box">
-      알림창<button onclick="displayNone()">닫기</button>
+      <p id="text">알림창임</p>
+      <button id="close">닫기</button>
     </div>
-    <button onclick="displayBlock()">알림창띄우기</button>
+    <button onclick="displayAlert('block')">알림창띄우기</button>
+    <button onclick="displayText('아이디')">버튼1</button>
+    <button onclick="displayText('비밀번호')">버튼2</button>
 
     <script>
-      function displayBlock() {
-        document.getElementById("alert-box").style.display = "block";
+      document.getElementById("close").addEventListener("click", function () {
+        displayAlert("none");
+      });
+
+      function displayAlert(styleDisplay) {
+        document.getElementById("alert-box").style.display = styleDisplay;
       }
 
-      function displayNone() {
-        document.getElementById("alert-box").style.display = "none";
+      function displayText(text) {
+        document.getElementById("text").innerHTML = text + "를 입력하세요.";
+        document.getElementById("alert-box").style.display = "block";
       }
     </script>
   </body>
