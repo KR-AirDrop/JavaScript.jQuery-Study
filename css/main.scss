@@ -15,7 +15,15 @@ div {
 }
 
 .list-group {
-  display: none;
+  visibility: hidden;
+  height: 0;
+  overflow: hidden;
+  transition: all 0.5s;
+}
+
+.list-show {
+  visibility: visible;
+  height: 206px;
 }
 
 .black-bg {
