@@ -77,9 +77,70 @@
 
     <div class="alert alert-danger">5초 이내 구매시 사은품 증정!</div>
 
-    <script>
-      var count = 5;
+    <div style="overflow: hidden">
+      <div class="slide-container">
+        <div class="slide-box">
+          <img src="../image/IU_15.jpeg" />
+        </div>
+        <div class="slide-box">
+          <img src="../image/IU_16.jpeg" />
+        </div>
+        <div class="slide-box">
+          <img src="../image/IU_17.jpeg" />
+        </div>
+      </div>
+    </div>
+    <button class="pre">이전</button>
+    <button class="slide-1">1</button>
+    <button class="slide-2">2</button>
+    <button class="slide-3">3</button>
+    <button class="next">다음</button>
 
+    <script>
+      var nowSlide = 1;
+
+      $(".pre").on("click", function () {
+        if (nowSlide == 1) {
+          $(".slide-container").css("transform", "translateX(-200vw)");
+          nowSlide = 3;
+        } else if (nowSlide == 2) {
+          $(".slide-container").css("transform", "translateX(0vw)");
+          nowSlide = 1;
+        } else if (nowSlide == 3) {
+          $(".slide-container").css("transform", "translateX(-100vw)");
+          nowSlide = 2;
+        }
+      });
+
+      $(".next").on("click", function () {
+        if (nowSlide == 1) {
+          $(".slide-container").css("transform", "translateX(-100vw)");
+          nowSlide = 2;
+        } else if (nowSlide == 2) {
+          $(".slide-container").css("transform", "translateX(-200vw)");
+          nowSlide = 3;
+        } else if (nowSlide == 3) {
+          $(".slide-container").css("transform", "translateX(0vw)");
+          nowSlide = 1;
+        }
+      });
+
+      $(".slide-1").on("click", function () {
+        $(".slide-container").css("transform", "translateX(0vw)");
+        nowSlide = 1;
+      });
+
+      $(".slide-2").on("click", function () {
+        $(".slide-container").css("transform", "translateX(-100vw)");
+        nowSlide = 2;
+      });
+
+      $(".slide-3").on("click", function () {
+        $(".slide-container").css("transform", "translateX(-200vw)");
+        nowSlide = 3;
+      });
+
+      var count = 5;
       setInterval(function () {
         if (count != 0) {
           count--;
@@ -88,10 +149,6 @@
           $(".alert").fadeOut();
         }
       }, 1000);
-
-      setTimeout(function () {
-        console.log(count);
-      }, 7000);
 
       function 삼육구(num) {
         if (num % 9 == 0) {
@@ -108,11 +165,19 @@
         if (!$("#inputId").val()) {
           alert("아이디를 입력하세요.");
           e.preventDefault();
+        } else if (!/\S+@\S+\.\S+/.test($("#inputId").val())) {
+          alert("이메일 형식이 아닙니다.");
+          e.preventDefault();
         } else if (!$("#inputPw").val()) {
           alert("비밀번호를 입력하세요.");
           e.preventDefault();
-        } else if ($("#inputPw").val().length < 8) {
-          alert("비밀번호는 8자리 이상이어야 합니다.");
+        } else if (
+          $("#inputPw").val().length < 8 ||
+          !/[A-Z]/.test($("#inputPw").val())
+        ) {
+          alert(
+            "비밀번호는 8자리 이상이고 최소 1개의 대문자를 포함해야 합니다."
+          );
           e.preventDefault();
         }
       });
