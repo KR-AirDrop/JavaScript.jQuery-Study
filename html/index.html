@@ -44,6 +44,8 @@
           <span class="navbar-toggler-icon"></span>
         </button>
       </div>
+      <div class="scrollBar"></div>
+
       <ul class="list-group">
         <li class="list-group-item">An item</li>
         <li class="list-group-item">A second item</li>
@@ -66,8 +68,24 @@
     </div>
 
     <script>
-      window.addEventListener("scroll", function () {
+      $(window).on("scroll", function () {
         var nowScrollValue = window.scrollY;
+        let scrollHeight =
+          Math.max(
+            document.body.scrollHeight,
+            document.documentElement.scrollHeight,
+            document.body.offsetHeight,
+            document.documentElement.offsetHeight,
+            document.body.clientHeight,
+            document.documentElement.clientHeight
+          ) - $(window).height();
+
+        var ratio = 100 * (nowScrollValue / scrollHeight);
+
+        console.log(nowScrollValue, scrollHeight);
+
+        $(".scrollBar").css("width", ratio + "%");
+
         if (nowScrollValue > 100) {
           $(".navbar-brand").css("font-size", "20px");
         } else {
@@ -176,11 +194,11 @@
         nowSlide = 3;
       });
 
-      var count = 5;
+      var countDown = 5;
       setInterval(function () {
-        if (count != 0) {
-          count--;
-          $(".alert").html(count + "초 이내 구매시 사은품 증정!");
+        if (countDown != 0) {
+          countDown--;
+          $(".alert").html(countDown + "초 이내 구매시 사은품 증정!");
         } else {
           $(".alert").fadeOut();
         }
