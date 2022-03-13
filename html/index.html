@@ -250,6 +250,19 @@
         $(".hello").slideUp();
       });
 
+      $(".black-bg").on("click", function (e) {
+        // 이벤트 관련 함수들
+        // e.target;            유저가 실제로 누른 것
+        // e.currentTarget;     이벤트 리스너 달린 곳
+        // e.preventDefault();  이벤트 기본 동작 막아줌 (로그인 안넘어가게 할때 썼음)
+        // e.stopPropagation(); 상위 요소로 이벤트 버블링 막아줌
+
+        if (e.target == document.querySelector(".black-bg")) {
+          // jQuery로 비교할 땐 약간의 처리가 필요
+          $(".black-bg").removeClass("show");
+        }
+      });
+
       document
         .querySelector(".navbar-toggler")
         .addEventListener("click", function () {
