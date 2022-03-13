@@ -39,15 +39,58 @@
     <nav class="navbar navbar-light bg-light">
       <div class="container-fluid">
         <span class="navbar-brand">Navbar</span>
-        <span class="badge bg-dark">Light 🔄</span>
 
         <button class="navbar-toggler" type="button">
           <span class="navbar-toggler-icon"></span>
         </button>
       </div>
+      <ul class="list-group">
+        <li class="list-group-item">An item</li>
+        <li class="list-group-item">A second item</li>
+        <li class="list-group-item">A third item</li>
+        <li class="list-group-item">A fourth item</li>
+        <li class="list-group-item">And a fifth one</li>
+      </ul>
     </nav>
 
+    <span class="badge bg-dark" style="margin-top: 300px">Light 🔄</span>
+
+    <div class="lorem" style="width: 300px; height: 200px; overflow-y: scroll">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, doloremque
+      ex laborum nam veritatis culpa ullam quis doloribus quibusdam ab fuga
+      distinctio, corporis soluta quaerat magnam cupiditate dolore unde!
+      Repellendus? Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+      Aspernatur unde quaerat molestias itaque dolor praesentium facilis
+      adipisci dolores iste impedit beatae placeat mollitia, quia explicabo iure
+      numquam delectus consequuntur! Placeat.
+    </div>
+
     <script>
+      window.addEventListener("scroll", function () {
+        var nowScrollValue = window.scrollY;
+        if (nowScrollValue > 100) {
+          $(".navbar-brand").css("font-size", "20px");
+        } else {
+          $(".navbar-brand").css("font-size", "40px");
+        }
+      });
+
+      var check = 1;
+
+      $(".lorem").on("scroll", function () {
+        var scroll = document.querySelector(".lorem").scrollTop;
+        var box = document.querySelector(".lorem").scrollHeight;
+        var boxHeight = document.querySelector(".lorem").clientHeight;
+
+        if ((scroll + boxHeight > box - 5) & check) {
+          console.log(check);
+          check--;
+          alert("다읽었네용~");
+        }
+      });
+
+      window.addEventListener("scroll", function () {});
+
       var count = 0;
 
       $(".badge").on("click", function () {
@@ -62,14 +105,6 @@
       });
     </script>
 
-    <ul class="list-group">
-      <li class="list-group-item">An item</li>
-      <li class="list-group-item">A second item</li>
-      <li class="list-group-item">A third item</li>
-      <li class="list-group-item">A fourth item</li>
-      <li class="list-group-item">And a fifth one</li>
-    </ul>
-
     <p class="hello">Hello</p>
     <button id="del-hello">Del</button>
 
@@ -77,7 +112,7 @@
 
     <div class="alert alert-danger">5초 이내 구매시 사은품 증정!</div>
 
-    <div style="overflow: hidden">
+    <div style="overflow: hidden; margin-top: 500px">
       <div class="slide-container">
         <div class="slide-box">
           <img src="../image/IU_15.jpeg" />
@@ -96,6 +131,7 @@
     <button class="slide-3">3</button>
     <button class="next">다음</button>
 
+    <div style="height: 2000px"></div>
     <script>
       var nowSlide = 1;
 
