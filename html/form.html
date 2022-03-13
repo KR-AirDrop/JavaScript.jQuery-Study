@@ -34,19 +34,51 @@
     </form>
 
     <script>
+      var 출석부 = ["흥민", "영희", "철수", "재석"];
+
+      function 이름찾기(name) {
+        출석부.forEach(function (i) {
+          if (name == i) {
+            console.log("있어용");
+          }
+        });
+      }
+
+      function 구구단() {
+        for (var i = 2; i < 10; i++) {
+          for (var j = 1; j < 10; j++) {
+            var result = `${i} X ${j} = ${i * j}`;
+            console.log(result);
+          }
+        }
+      }
+
+      function 목표량계산기(판매실적어레이, 평균월별판매량) {
+        var sum = 0;
+        for (var i = 0; i < 판매실적어레이.length; i++) {
+          sum += 판매실적어레이[i];
+        }
+        var dream =
+          평균월별판매량 * 판매실적어레이.length + 평균월별판매량 - sum;
+        console.log(`12월엔 ${dream}을 팔아야 합니다.`);
+      }
+
+      var 셔츠사이즈 = [90, 95, 100, 105, 110, 115];
+      var 바지사이즈 = [26, 28, 30, 32, 34, 36, 38];
+
       $("#option1").on("change", function () {
         if ($("#option1").val() == "셔츠") {
           $("#option2").html("");
-          var 템플릿 = `<option>95</option>
-            <option>100</option>
-            <option>105</option>`;
-          $("#option2").append(템플릿);
+          for (var i = 0; i < 셔츠사이즈.length; i++) {
+            var 템플릿 = `<option>${셔츠사이즈[i]}</option>`;
+            $("#option2").append(템플릿);
+          }
         } else {
           $("#option2").html("");
-          var 템플릿 = `<option>28</option>
-            <option>30</option>
-            <option>32</option>`;
-          $("#option2").append(템플릿);
+          바지사이즈.forEach(function (i) {
+            var 템플릿 = `<option>${i}</option>`;
+            $("#option2").append(템플릿);
+          });
         }
       });
     </script>
