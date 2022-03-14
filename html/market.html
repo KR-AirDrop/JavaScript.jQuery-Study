@@ -11,39 +11,17 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
+    <link href="../css/main.css" rel="stylesheet" />
 
     <title>Hello, world!</title>
   </head>
   <body>
-    <div class="card-group container">
-      <div class="card">
-        <img src="https://via.placeholder.com/600" />
-        <div class="card-body">
-          <h5 class="title">Card title</h5>
-          <p class="price">가격 : 70000</p>
-          <button class="btn btn-danger">주문하기</button>
-        </div>
-      </div>
-      <div class="card">
-        <img src="https://via.placeholder.com/600" />
-        <div class="card-body">
-          <h5 class="title">Card title</h5>
-          <p class="price">가격 : 70000</p>
-          <button class="btn btn-danger">주문하기</button>
-        </div>
-      </div>
-      <div class="card">
-        <img src="https://via.placeholder.com/600" />
-        <div class="card-body">
-          <h5 class="title">Card title</h5>
-          <p class="price">가격 : 70000</p>
-          <button class="btn btn-danger">주문하기</button>
-        </div>
-      </div>
-    </div>
+    <div class="card-group container"></div>
 
     <div class="container my-4">
       <button class="btn btn-danger" id="sort-price">낮은 가격순</button>
+      <button class="btn btn-danger" id="sort-abc">가나다 순</button>
+      <button class="btn btn-danger" id="less-50000">50000원 이하</button>
     </div>
     <script
       src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -57,19 +35,45 @@
         { id: 2, price: 60000, title: "Black Monastery" },
       ];
 
-      parseProduct();
+      parseProduct(products);
 
       $("#sort-price").on("click", function () {
         products.sort(function (a, b) {
           return a.price - b.price;
         });
-        parseProduct();
+        parseProduct(products);
       });
 
-      function parseProduct() {
-        for (var i = 0; i < products.length; i++) {
-          $(`.title`).eq(i).html(products[i].title);
-          $(`.price`).eq(i).html(`가격 : ${products[i].price}원`);
+      $("#sort-abc").on("click", function () {
+        products.sort(function (a, b) {
+          let x = a.title.toLowerCase();
+          let y = b.title.toLowerCase();
+          if (x > y) return 1;
+          else return -1;
+        });
+        parseProduct(products);
+      });
+
+      $("#less-50000").on("click", function () {
+        var lessProducts = products.filter(function (a) {
+          return a.price <= 50000;
+        });
+        parseProduct(lessProducts);
+      });
+
+      function parseProduct(productArray) {
+        $(".card-group").html("");
+        for (var i = 0; i < productArray.length; i++) {
+          $(".card-group").append(`
+          <div class="card">
+            <img src="https://via.placeholder.com/600" />
+            <div class="card-body">
+                <h5 class="title">${productArray[i].title}</h5>
+                <p class="price">가격 : ${productArray[i].price}원</p>
+                <button class="btn btn-danger">주문하기</button>
+            </div>
+        </div>
+      `);
         }
       }
     </script>
