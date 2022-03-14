@@ -15,6 +15,12 @@
       integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
       crossorigin="anonymous"
     ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"
+      integrity="sha256-eVNjHw5UeU0jUqPPpZHAkU1z4U+QFBBY488WvueTm88="
+      crossorigin="anonymous"
+    ></script>
+
     <title>JS practice</title>
   </head>
   <body>
@@ -81,9 +87,6 @@
           ) - $(window).height();
 
         var ratio = 100 * (nowScrollValue / scrollHeight);
-
-        console.log(nowScrollValue, scrollHeight);
-
         $(".scrollBar").css("width", ratio + "%");
 
         if (nowScrollValue > 100) {
@@ -148,6 +151,34 @@
     <button class="slide-2">2</button>
     <button class="slide-3">3</button>
     <button class="next">다음</button>
+    <script>
+      var 이미지1 = document.querySelectorAll(".slide-box img")[0];
+
+      var 매니저 = new Hammer.Manager(이미지1); // 어떤 요소에 터치기능 개발할건지.
+      매니저.add(new Hammer.Pan({ threshold: 0 }));
+
+      매니저.on("pan", function (e) {
+        console.log(e.deltaX);
+        $(".slide-container").css("transform", `translateX(${e.deltaX}px)`);
+
+        if (e.isFinal & (e.deltaX < -300)) {
+          $(".slide-container").addClass("transforming");
+          $(".slide-container").css("transform", "translateX(-100vw)");
+          setTimeout(function () {
+            $(".slide-container").removeClass("transforming");
+          }, 500);
+        } else if (e.isFinal) {
+          $(".slide-container").addClass("transforming");
+          $(".slide-container").css("transform", "translateX(0vw)");
+          setTimeout(function () {
+            $(".slide-container").removeClass("transforming");
+          }, 500);
+        }
+      });
+
+      // 그냥 라이브러리 사용법 보면 어떻게 쓰는지 나온다.
+      // Pan 슬라이드, rotate 돌리는거, pinch 꼬집는거
+    </script>
 
     <div style="height: 2000px"></div>
     <script>

@@ -74,7 +74,10 @@ div {
 
 .slide-container {
   width: 300vw;
-  transition: all 1s;
+}
+
+.transforming {
+  transition: transform 0.5s;
 }
 
 .slide-box {
