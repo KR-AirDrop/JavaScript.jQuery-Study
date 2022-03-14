@@ -23,17 +23,24 @@
       <button class="btn btn-danger" id="sort-abc">가나다 순</button>
       <button class="btn btn-danger" id="less-50000">50000원 이하</button>
     </div>
+    <select class="form-control" id="less">
+      <option>50000원 이하</option>
+      <option>60000원 이하</option>
+      <option>70000원 이하</option>
+    </select>
     <script
       src="https://code.jquery.com/jquery-3.6.0.min.js"
       integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
       crossorigin="anonymous"
     ></script>
     <script>
-      var products = [
+      var productsOriginal = [
         { id: 0, price: 70000, title: "Blossom Dress" },
         { id: 1, price: 50000, title: "Springfield Shirt" },
         { id: 2, price: 60000, title: "Black Monastery" },
       ];
+
+      var products = [...productsOriginal];
 
       parseProduct(products);
 
@@ -59,6 +66,26 @@
           return a.price <= 50000;
         });
         parseProduct(lessProducts);
+      });
+
+      $("#less").on("change", function () {
+        var products = [...productsOriginal];
+        if ($("#less").val() == "50000원 이하") {
+          var lessProducts = products.filter(function (a) {
+            return a.price <= 50000;
+          });
+          parseProduct(lessProducts);
+        } else if ($("#less").val() == "60000원 이하") {
+          var lessProducts = products.filter(function (a) {
+            return a.price <= 60000;
+          });
+          parseProduct(lessProducts);
+        } else if ($("#less").val() == "70000원 이하") {
+          var lessProducts = products.filter(function (a) {
+            return a.price <= 70000;
+          });
+          parseProduct(lessProducts);
+        }
       });
 
       function parseProduct(productArray) {
