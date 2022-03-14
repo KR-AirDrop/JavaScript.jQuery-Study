@@ -22,18 +22,61 @@
       <button class="btn btn-danger" id="sort-price">낮은 가격순</button>
       <button class="btn btn-danger" id="sort-abc">가나다 순</button>
       <button class="btn btn-danger" id="less-50000">50000원 이하</button>
+      <select class="form-control mt-4" id="less" style="width: 30%">
+        <option>50000원 이하</option>
+        <option>60000원 이하</option>
+        <option>70000원 이하</option>
+      </select>
     </div>
-    <select class="form-control" id="less">
-      <option>50000원 이하</option>
-      <option>60000원 이하</option>
-      <option>70000원 이하</option>
-    </select>
+    <div class="container mt-4">
+      <h4 id="hello">Ajax</h4>
+      <button class="btn btn-primary ajax-btn">Get 요청</button>
+    </div>
+
+    <div class="container mt-4">
+      <div class="card" style="width: 18rem">
+        <img class="card-img-top" />
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">
+            Some quick example text to build on the card title and make up the
+            bulk of the card's content.
+          </p>
+          <a href="#" class="btn btn-primary showproduct">상품 보여주기</a>
+        </div>
+      </div>
+    </div>
+
+    <div style="height: 1000px"></div>
+
+    <!-- jQuery -->
     <script
       src="https://code.jquery.com/jquery-3.6.0.min.js"
       integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
       crossorigin="anonymous"
     ></script>
+
     <script>
+      $(".showproduct").on("click", function () {
+        $.ajax({
+          url: "https://codingapple1.github.io/data.json",
+          type: "GET",
+        }).done(function (data) {
+          $(".card-title").html(data.model);
+          $(".card-text").html(data.price);
+          $(".card-img-top").attr("src", data.img);
+        });
+      });
+
+      $(".ajax-btn").on("click", function () {
+        $.ajax({
+          url: "https://codingapple1.github.io/hello.txt",
+          type: "GET",
+        }).done(function (data) {
+          $("#hello").html(data);
+        });
+      });
+
       var productsOriginal = [
         { id: 0, price: 70000, title: "Blossom Dress" },
         { id: 1, price: 50000, title: "Springfield Shirt" },
